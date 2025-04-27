@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Student Dashboard</h2>
+    <a href="/report">View Attendance Report</a>
+
+    <h3>Join Class</h3>
+    {% if class_link %}
+        <a class="class-link" href="{{ class_link }}" target="_blank">Join Class</a>
+    {% else %}
+        <p>No class link uploaded yet.</p>
+    {% endif %}
+</div>
+
+</body>
+</html>

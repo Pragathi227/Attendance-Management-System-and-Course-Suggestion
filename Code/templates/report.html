@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background: #f3f4f6;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-radius: 12px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #1f2937;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .suggestion-box {
+            background: #e0f7fa;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-left: 6px solid #00796b;
+            border-radius: 6px;
+        }
+        .suggestion-box a {
+            color: #00695c;
+            font-weight: bold;
+        }
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .back-btn:hover {
+            background-color: #3730a3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Your Attendance Report</h2>
+
+    {% if summary %}
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Total Classes</th>
+                <th>Days Present</th>
+                <th>Attendance %</th>
+                <th>Suggested Course</th>
+            </tr>
+            {% for item in summary %}
+                <tr>
+                    <td>{{ item.subject }}</td>
+                    <td>{{ item.total_classes }}</td>
+                    <td>{{ item.days_present }}</td>
+                    <td>{{ item.attendance_percentage }}%</td>
+                    <td>
+                        {% if item.suggested_link %}
+                            <a href="{{ item.suggested_link }}" target="_blank">Watch Now</a>
+                        {% else %}
+                            No suggestion available
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No attendance data found.</p>
+    {% endif %}
+
+    <a class="back-btn" href="{{ url_for('student_dashboard') }}">⬅ Back to Dashboard</a>
+</div>
+</body>
+</html>

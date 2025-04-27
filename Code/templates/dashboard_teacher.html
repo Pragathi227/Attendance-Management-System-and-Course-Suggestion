@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Welcome, {{ session['username'] }} 👩‍🏫</h2>
+        <a href="/logout">Logout</a>
+
+        <hr>
+        <h3>Upload Attendance (Excel)</h3>
+        <form action="/upload_attendance" method="POST" enctype="multipart/form-data">
+            <label for="subject">Subject:</label>
+            <select name="subject" required>
+                <option value="Python">Python</option>
+                <option value="DBMS">DBMS</option>
+                <option value="Aptitude">Aptitude</option>
+            </select><br><br>
+            <input type="file" name="attendance_file" required>
+            <button type="submit">Upload</button>
+        </form>
+
+        <hr>
+        <h3>Upload Class Link</h3>
+        <form method="POST" action="/upload_class_link">
+            <label for="subject">Subject:</label>
+            <select name="subject" required>
+                <option value="Python">Python</option>
+                <option value="DBMS">DBMS</option>
+                <option value="Aptitude">Aptitude</option>
+            </select><br><br>
+            <input type="url" name="class_link" placeholder="Paste Class Join Link" required>
+            <button type="submit">Upload Link</button>
+        </form>
+
+        <hr>
+        <h3>Upload YouTube Course Suggestions</h3>
+        <form method="POST" action="/upload_youtube_links">
+            <label for="subject">Subject:</label>
+            <select name="subject" required>
+                <option value="Python">Python</option>
+                <option value="DBMS">DBMS</option>
+                <option value="Aptitude">Aptitude</option>
+            </select><br><br>
+            <input type="url" name="low" placeholder="Link for Low Attendance" required><br><br>
+            <input type="url" name="average" placeholder="Link for Average Attendance" required><br><br>
+            <input type="url" name="high" placeholder="Link for High Attendance" required><br><br>
+            <button type="submit">Save Links</button>
+        </form>
+
+        <hr>
+        <a href="/report">View Full Report</a>
+    </div>
+</body>
+</html>
